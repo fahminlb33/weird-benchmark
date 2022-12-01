@@ -40,7 +40,8 @@ for (chunk = 0; chunk < 4; chunk++) {
 
 for (i = 0; i < N; i++) {
     for (j = 0; j < N; j++) {
-        process.stdout.write("%f ", result_matrix[i][j]);
+        const elem = result_matrix[i][j];
+        process.stdout.write(`${elem} `);
     }
     process.stdout.write("\n");
 }
