@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/login-bcryptjs', async (req, res) => {
-    const user = await dbClient.db("sampledb").collection("user").findOne({ email: req.body.user });
+    const user = await dbClient.db(config.DB_NAME).collection("user").findOne({ email: req.body.user });
     if (!user) {
         res.status(401).send('User or password do not match');
         return;
@@ -52,7 +52,7 @@ app.post('/login-bcryptjs', async (req, res) => {
     }
 
     const token = jsonwebtoken.sign({ user: user.name }, config.JWT_SECRET);
-    const company = await dbClient.db("sampledb").collection("company").findOne({ companyId: user.companyId });
+    const company = await dbClient.db(config.DB_NAME).collection("company").findOne({ companyId: user.companyId });
 
     res.json({
         user: user.user,
@@ -62,7 +62,7 @@ app.post('/login-bcryptjs', async (req, res) => {
 })
 
 app.post('/login-bcrypt', async (req, res) => {
-    const user = await dbClient.db("sampledb").collection("user").findOne({ email: req.body.user });
+    const user = await dbClient.db(config.DB_NAME).collection("user").findOne({ email: req.body.user });
     if (!user) {
         res.status(401).send('User or password do not match');
         return;
@@ -78,7 +78,7 @@ app.post('/login-bcrypt', async (req, res) => {
     }
 
     const token = jsonwebtoken.sign({ user: user.name }, config.JWT_SECRET);
-    const company = await dbClient.db("sampledb").collection("company").findOne({ companyId: user.companyId });
+    const company = await dbClient.db(config.DB_NAME).collection("company").findOne({ companyId: user.companyId });
 
     res.json({
         user: user.user,

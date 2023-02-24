@@ -3,17 +3,15 @@ version: "3.0"
 # --- volumes
 volumes:
   mongodb:
-    driver: local
   elasticsearch:
-    driver: local
 
 
 # --- services
 services:
-  # redis
-  app:
+  # example app to be monitored
+  example_app:
     container_name: example-app
-    build: ./api_spans
+    build: ./expressjs_custom_spans
     depends_on:
       - mongodb
     ports:
@@ -73,4 +71,3 @@ services:
       - 5601:5601
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-
